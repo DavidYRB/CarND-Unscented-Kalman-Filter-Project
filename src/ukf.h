@@ -67,6 +67,10 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  //* Lidar process matrix H
+  MatrixXd H_;
+
+
 
   /**
    * Constructor
@@ -102,6 +106,15 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  /**
+  * get sigma points from estimated porior information
+  */
+  void GetAugmentedSigmaPoints(MatrixXd *Xsig_out);
+
+  void PredictSigmaPoints(MatrixXd Xsig_in, double delta_t);
+
+  void PredictedMeanAndCov();
 };
 
 #endif /* UKF_H */
